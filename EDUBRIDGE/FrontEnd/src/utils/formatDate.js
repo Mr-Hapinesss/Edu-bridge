@@ -1,7 +1,7 @@
-/**
- * formatDate(dateString)
- * Converts an ISO date string to a readable format.
- * e.g. "2024-03-15T10:30:00.000Z" → "March 15, 2024"
+/*
+ formatDate(dateString)
+ Converts an ISO date string to a readable format.
+ e.g. "2024-03-15T10:30:00.000Z" → "March 15, 2024"
  */
 export const formatDate = (dateString) => {
   if (!dateString) return 'N/A'
@@ -12,9 +12,9 @@ export const formatDate = (dateString) => {
   })
 }
 
-/**
- * formatDateShort(dateString)
- * e.g. "2024-03-15T10:30:00.000Z" → "Mar 15, 2024"
+/*
+ formatDateShort(dateString)
+ e.g. "2024-03-15T10:30:00.000Z" → "Mar 15, 2024"
  */
 export const formatDateShort = (dateString) => {
   if (!dateString) return 'N/A'
@@ -25,10 +25,10 @@ export const formatDateShort = (dateString) => {
   })
 }
 
-/**
- * timeAgo(dateString)
- * Returns a relative time string.
- * e.g. "3 days ago", "just now", "2 months ago"
+/*
+ timeAgo(dateString)
+ Returns a relative time string.
+ e.g. "3 days ago", "just now", "2 months ago"
  */
 export const timeAgo = (dateString) => {
   if (!dateString) return ''

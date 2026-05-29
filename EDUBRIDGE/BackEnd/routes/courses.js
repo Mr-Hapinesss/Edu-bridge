@@ -5,10 +5,8 @@ const { protect }   = require('../middleware/authMiddleware');
 const { authorize } = require('../middleware/roleMiddleware');
 
 
-/* 
-   GET /api/courses
-   List all published courses. Public.
- */
+
+// List all published courses. Public.
 router.get('/', async (req, res) => {
     try {
         const courses = await Course.find({ courseStatus: 'published' })
@@ -24,12 +22,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-
-/* 
-   GET /api/courses/:id
-   Get a single course by ID. Public, but unpublished courses are
-   restricted to the owning instructor and admins.
- */
+// Get a single course by ID. Public, but unpublished courses are restricted to the owning instructor and admins.
 router.get('/:id', async (req, res) => {
     try {
         const course = await Course.findById(req.params.id)
@@ -60,11 +53,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-
-/* 
-   POST /api/courses
-   Create a new course. Private — Instructor or Admin only.
- */
+// Create a new course. Private — Instructor or Admin only.
 router.post('/', protect, authorize('admin', 'instructor'), async (req, res) => {
     const { title, description, price, duration } = req.body;
 
@@ -93,12 +82,8 @@ router.post('/', protect, authorize('admin', 'instructor'), async (req, res) => 
         res.status(500).json({ message: 'Server error while creating course.' });
     }
 });
-
-
-/* 
-   PUT /api/courses/:id
-   Update a course. Private — owning Instructor or Admin only.
- */
+ 
+// Update a course. Private — owning Instructor or Admin only.
 router.put('/:id', protect, authorize('admin', 'instructor'), async (req, res) => {
     const { title, description, price, duration, courseStatus } = req.body;
     const allowedStatuses = ['draft', 'under_review', 'published', 'archived'];
@@ -147,9 +132,7 @@ router.put('/:id', protect, authorize('admin', 'instructor'), async (req, res) =
     }
 });
 
-
 /* 
-   DELETE /api/courses/:id
    Delete a course. Private — owning Instructor or Admin only.
    TODO: Add cascade delete for all associated Enrollments and Lessons.
  */

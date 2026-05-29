@@ -1,10 +1,8 @@
 const mongoose = require('mongoose');
 
-/*
-CourseSchema
-Represents a course created by an instructor.
-Status lifecycle: draft → under_review → published → archived
- */
+
+// Status lifecycle: draft → under_review → published → archived
+
 const CourseSchema = new mongoose.Schema(
     {
         title: {

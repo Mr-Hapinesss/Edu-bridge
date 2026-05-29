@@ -53,14 +53,19 @@ const UserSchema = new mongoose.Schema(
    modified 
 
 */
-UserSchema.pre('save', async function (next) {
+UserSchema.pre('save', async function () {
     // Skip re-hashing if the password field hasn't changed
-    if (!this.isModified('password')) return next();
+    if (!this.isModified('password')) {
+        return;
+    };
 
-    const salt    = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt);
-    next();
-});
+    try{
+        const salt    = await bcrypt.genSalt(10);
+        this.password = await bcrypt.hash(this.password, salt);
+    } catch (error) {
+        console.error('Password hashing error:', error.message);
+        throw new Error('Server error during password processing.');    
+}});
 
 
 /*  

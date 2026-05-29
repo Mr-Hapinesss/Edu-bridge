@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 
 /*
-EnrollmentSchema
 Tracks which user is enrolled in which course, and their progress status.
 The compound unique index prevents a user from enrolling in the same course twice.
  */

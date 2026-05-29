@@ -20,7 +20,7 @@ const app = express();
 // GLOBAL MIDDLEWARE
 app.use(cors(
     {
-        origin: 'http://localhost:5173', // allow requests from this origin (our frontend)
+        origin: process.env.FRONTEND_URI, // allow requests from this origin (our frontend)
         credentials: true, // allow cookies to be sent
     }
 ))
@@ -30,8 +30,8 @@ app.use(express.urlencoded({ extended: false })); // accepts form data
 
 // ROUTE MOUNTING
 app.use('/api/auth/users', userRoutes);
-app.use('/api/courses', courseRoutes);
-app.use('/api/enroll', enrollmentRoutes);
+app.use('/api/v1/courses', courseRoutes);
+app.use('/api/v1/enroll', enrollmentRoutes);
 
 
 // ERROR HANDLING MIDDLEWARE -- should be last or wont work!

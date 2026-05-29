@@ -1,9 +1,9 @@
 import axiosInstance from './axios'
 
-/**
- * Auth API
- * All functions return the `data` object from the Axios response directly,
- * so callers get clean objects without needing to unwrap `.data` themselves.
+/*
+Auth API
+All functions return the `data` object from the Axios response directly,
+so callers get clean objects without needing to unwrap `.data` themselves.
  */
 
 // POST /api/users/register
