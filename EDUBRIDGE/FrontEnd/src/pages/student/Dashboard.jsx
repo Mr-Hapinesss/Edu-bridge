@@ -44,6 +44,25 @@ export default function StudentDashboard() {
             </div>
           ))}
         </div>
+        {/* Profile shortcut — sits between stats and course list */}
+      <div className="mb-8 p-5 bg-white dark:bg-slate-800 rounded-2xl border border-amber-100 dark:border-slate-700 flex items-center justify-between gap-4 flex-wrap">
+            <div className="flex items-center gap-4">
+                  {/* Avatar initial */}
+             <div className="w-12 h-12 rounded-xl bg-teal-100 dark:bg-teal-900 flex items-center justify-center text-teal-700 dark:text-teal-300 font-display font-bold text-xl shrink-0">
+                        {user?.name?.[0]?.toUpperCase()}
+             </div>
+                  <div>
+                        <p className="font-semibold text-slate-800 dark:text-amber-50">{user?.name}</p>
+                        <p className="text-sm text-slate-400 dark:text-slate-500">{user?.email}</p>
+                  </div>
+            </div>
+            <Link
+                  to="/profile"
+                  className="text-sm px-4 py-2 rounded-xl border border-teal-500 dark:border-teal-400 text-teal-700 dark:text-teal-300 hover:bg-teal-50 dark:hover:bg-teal-900/30 font-medium transition-colors shrink-0"
+       >
+                  Edit profile →
+            </Link>
+      </div>
 
         {/* Course list */}
         <h2 className="font-display font-semibold text-xl text-slate-800 dark:text-amber-50 mb-5">

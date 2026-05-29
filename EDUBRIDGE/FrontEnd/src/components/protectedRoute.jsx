@@ -2,18 +2,18 @@ import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import useAuth from '../hooks/useAuth'
 import LoadingSpinner from './LoadingSpinner'
 
-/**
- * ProtectedRoute
- * Wraps any route that requires the user to be logged in.
- * If loading (hydrating from localStorage), shows a spinner — this prevents
- * the login redirect flash on page refresh while auth state is being restored.
- * If not authenticated, redirects to /login and remembers where the user
- * was trying to go (via location state) so we can send them back after login.
- *
- * Usage in App.jsx:
- *   <Route element={<ProtectedRoute />}>
- *     <Route path="/dashboard" element={<Dashboard />} />
- *   </Route>
+/*
+ ProtectedRoute
+ Wraps any route that requires the user to be logged in.
+ If loading (hydrating from localStorage), shows a spinner — this prevents
+ the login redirect flash on page refresh while auth state is being restored.
+ If not authenticated, redirects to /login and remembers where the user
+ was trying to go (via location state) so we can send them back after login.
+
+ Usage in App.jsx:
+   <Route element={<ProtectedRoute />}>
+     <Route path="/dashboard" element={<Dashboard />} />
+   </Route>
  */
 export default function ProtectedRoute() {
   const { isAuthenticated, loading } = useAuth()

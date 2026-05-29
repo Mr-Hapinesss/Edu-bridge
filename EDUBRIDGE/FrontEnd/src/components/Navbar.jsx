@@ -68,16 +68,17 @@ export default function Navbar() {
 
   // Build the nav links based on the user's role
   const navLinks = [
-    { to: '/',         label: 'Courses',   always: true },
-    { to: '/dashboard', label: 'My Learning', auth: true },
-    { to: '/instructor/dashboard', label: 'Teach',  roles: ['instructor', 'admin'] },
-    { to: '/admin/dashboard',      label: 'Admin',  roles: ['admin'] },
-  ].filter(link => {
-    if (link.always) return true
-    if (link.auth   && !isAuthenticated) return false
-    if (link.roles  && !link.roles.includes(user?.role)) return false
-    return true
-  })
+  { to: '/',          label: 'Courses',    always: true },
+  { to: '/dashboard', label: 'My Learning', auth: true },
+  { to: '/profile',   label: 'Profile',    auth: true },
+  { to: '/instructor/dashboard', label: 'Teach',  roles: ['instructor', 'admin'] },
+  { to: '/admin/dashboard',      label: 'Admin',  roles: ['admin'] },
+].filter(link => {
+  if (link.always) return true
+  if (link.auth   && !isAuthenticated) return false
+  if (link.roles  && !link.roles.includes(user?.role)) return false
+  return true
+})
 
   const isActive = (to) => location.pathname === to
 
@@ -112,60 +113,57 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* ── Right-side controls ── */}
-        <div className="flex items-center gap-3">
+{/* ── Right-side controls ── */}
+<div className="flex items-center gap-3">
 
-          {/* Dark / Light toggle */}
-          <button
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
-            className="p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-amber-100 dark:hover:bg-slate-800 hover:text-teal-700 dark:hover:text-teal-300 transition-colors duration-200"
-          >
-            {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
-          </button>
+  {/* Dark / Light toggle */}
+  <button
+    onClick={toggleTheme}
+    aria-label="Toggle theme"
+    className="p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-amber-100 dark:hover:bg-slate-800 hover:text-teal-700 dark:hover:text-teal-300 transition-colors duration-200"
+  >
+    {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
+  </button>
 
-          {/* Auth buttons — desktop */}
-          <div className="hidden md:flex items-center gap-3">
-            {isAuthenticated ? (
-              <>
-                {/* User pill */}
-                <span className="text-sm text-slate-600 dark:text-slate-300 font-medium">
-                  {user?.name?.split(' ')[0]}
-                </span>
-                <button
-                  onClick={handleLogout}
-                  className="text-sm px-4 py-1.5 rounded-lg border border-teal-600 dark:border-teal-400 text-teal-700 dark:text-teal-300 hover:bg-teal-600 hover:text-white dark:hover:bg-teal-500 dark:hover:text-slate-900 transition-colors duration-200 font-medium"
-                >
-                  Sign out
-                </button>
-              </>
-            ) : (
-              <>
-                <Link
-                  to="/login"
-                  className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-teal-700 dark:hover:text-teal-300 transition-colors"
-                >
-                  Sign in
-                </Link>
-                <Link
-                  to="/register"
-                  className="text-sm px-4 py-1.5 rounded-lg bg-teal-600 dark:bg-teal-500 text-white hover:bg-teal-700 dark:hover:bg-teal-400 transition-colors duration-200 font-medium shadow-sm"
-                >
-                  Get started
-                </Link>
-              </>
-            )}
-          </div>
+  {/* Auth buttons — desktop */}
+  <div className="hidden md:flex items-center gap-3">
+    {/* Inside the mobile dropdown, replace the isAuthenticated block */}
+{isAuthenticated ? (
+  <>
+    <span className="text-sm text-slate-500 dark:text-slate-400">
+      <strong className="text-slate-700 dark:text-slate-200">{user?.name}</strong>
+    </span>
+    {/* Profile link in mobile menu */}
+    <Link
+      to="/profile"
+      className="text-sm text-center py-2 px-2 rounded-lg border border-teal-300 dark:border-teal-600 text-teal-700 dark:text-teal-300 hover:bg-teal-50 dark:hover:bg-teal-900/30 transition-colors font-medium"
+    >
+      My Profile
+    </Link>
+    <button
+      onClick={handleLogout}
+      className="text-sm w-full py-2 rounded-lg border border-teal-600 text-teal-700 dark:border-teal-400 dark:text-teal-300 hover:bg-teal-600 hover:text-white transition-colors font-medium"
+    >
+      Sign out
+    </button>
+  </>
+) : (
+  <>
+    <Link to="/login"    className="text-sm text-center py-2 px-2 rounded-lg text-slate-700 dark:text-slate-200 hover:text-slate-500 transition-colors">Sign in</Link>
+    <Link to="/register" className="text-sm text-center py-2 px-2 rounded-lg bg-teal-600 text-white hover:bg-teal-700 transition-colors font-medium">Get started</Link>
+  </>
+)}
+  </div>
 
-          {/* Hamburger — mobile only */}
-          <button
-            onClick={() => setMenuOpen(o => !o)}
-            aria-label="Open menu"
-            className="md:hidden p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-amber-100 dark:hover:bg-slate-800 transition-colors"
-          >
-            <HamburgerIcon open={menuOpen} />
-          </button>
-        </div>
+  {/* Hamburger — mobile only */}
+  <button
+    onClick={() => setMenuOpen(o => !o)}
+    aria-label="Open menu"
+    className="md:hidden p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-amber-100 dark:hover:bg-slate-800 transition-colors"
+  >
+    <HamburgerIcon open={menuOpen} />
+  </button>
+</div>
       </nav>
 
       {/* ── Mobile Dropdown Menu ── */}
@@ -192,8 +190,8 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <Link to="/login"    className="text-sm text-center py-2 rounded-lg border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-200 hover:border-teal-500 transition-colors">Sign in</Link>
-                <Link to="/register" className="text-sm text-center py-2 rounded-lg bg-teal-600 text-white hover:bg-teal-700 transition-colors font-medium">Get started</Link>
+                <Link to="/login"    className="text-sm text-center py-2 px-2 rounded-lg text-slate-700 dark:text-slate-200 hover:border-teal-500 transition-colors">Sign in</Link>
+                <Link to="/register" className="text-sm text-center py-2 px-2 rounded-lg bg-teal-600 text-white hover:bg-teal-700 transition-colors font-medium">Get started</Link>
               </>
             )}
           </div>

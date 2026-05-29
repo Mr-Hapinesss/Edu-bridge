@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom'
 
-/**
- * CourseCard
- * Props:
- *   course: { _id, title, description, price, duration, instructor: { name }, courseStatus }
- *   onEnroll?:   (courseId) => void   — show Enroll button if provided
- *   onUnenroll?: (courseId) => void   — show Unenroll button if provided
- *   showStatus?: boolean              — show the status badge (for instructor dashboard)
+/*
+ CourseCard
+ Props:
+   course: { _id, title, description, price, duration, instructor: { name }, courseStatus }
+   onEnroll?:   (courseId) => void   — show Enroll button if provided
+   onUnenroll?: (courseId) => void   — show Unenroll button if provided
+   showStatus?: boolean              — show the status badge (for instructor dashboard)
  */
 export default function CourseCard({ course, onEnroll, onUnenroll, showStatus = false }) {
   const { _id, title, description, price, duration, instructor, courseStatus } = course

@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react'
 import { getAllCourses, getCourseById } from '../api/coursesApi'
 
-/**
- * useCourses
- * Fetches the published course list on mount.
- * Returns loading, error, and courses array.
- *
- * Usage:
- *   const { courses, loading, error } = useCourses()
+/*
+ useCourses
+ Fetches the published course list on mount.
+ Returns loading, error, and courses array.
+
+ Usage:
+   const { courses, loading, error } = useCourses()
  */
 export function useCourses() {
   const [courses, setCourses] = useState([])
@@ -36,12 +36,12 @@ export function useCourses() {
   return { courses, loading, error }
 }
 
-/**
- * useCourse
- * Fetches a single course by ID.
- *
- * Usage:
- *   const { course, loading, error } = useCourse(id)
+/*
+ useCourse
+ Fetches a single course by ID.
+
+ Usage:
+   const { course, loading, error } = useCourse(id)
  */
 export function useCourse(id) {
   const [course, setCourse] = useState(null)
